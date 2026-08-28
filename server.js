@@ -28,5 +28,11 @@ app.get('/', (req, res) => {
   res.send('Furniture API is running...');
 });
 
+// Global error handler to prevent uncaught exceptions from killing the process
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({ error: err?.message || 'Server error' });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

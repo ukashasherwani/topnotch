@@ -19,9 +19,9 @@ export const createOrder = async (req, res) => {
     });
 
     const createdOrder = await order.save();
-    res.status(201).json(createdOrder);
+    return res.status(201).json(createdOrder);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating order', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -33,8 +33,8 @@ export const getOrderById = async (req, res) => {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    res.json(order);
+    return res.json(order);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching order', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };

@@ -6,9 +6,9 @@ import Order from '../models/orderModel.js';
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({}).sort({ createdAt: -1 });
-    res.json(orders);
+    return res.json(orders);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching orders', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -25,9 +25,9 @@ export const updateOrderStatus = async (req, res) => {
 
     order.status = status;
     const updatedOrder = await order.save();
-    res.json(updatedOrder);
+    return res.json(updatedOrder);
   } catch (error) {
-    res.status(500).json({ message: 'Error updating status', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -47,9 +47,9 @@ export const createProduct = async (req, res) => {
     });
 
     const createdProduct = await product.save();
-    res.status(201).json(createdProduct);
+    return res.status(201).json(createdProduct);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating product', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -66,8 +66,8 @@ export const updatePaymentStatus = async (req, res) => {
 
     order.isPaid = isPaid;
     const updatedOrder = await order.save();
-    res.json(updatedOrder);
+    return res.json(updatedOrder);
   } catch (error) {
-    res.status(500).json({ message: 'Error updating payment status', error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
